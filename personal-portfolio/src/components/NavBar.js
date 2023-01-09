@@ -1,36 +1,49 @@
-import React from "react";
-import { useRef } from "react";
-import { FaBars, FaTimes } from "react-icons/fa"
+import React from 'react';
+import { useState, useEffect } from 'react';
+import { Navbar, Nav, Container } from 'react-bootstrap'
 import "../Styles/NavBar.css"
 
 function NavBar() {
-    const navRef = useRef();
+    const [currentLink, setCurrentLink] = useState('home');
+    const [scroll, setScroll] = useState(false);
 
-    // Functionsto add and remove class name
-    const showNavbar = () => {
-        navRef.current.classList.toggle("responsive_nav");
+    useEffect(() => {
+        const onScroll = () => {
+            if (window.scrollY > 50) {
+                setScroll(true);
+            } else {
+                setScroll(false);
+            }
+        }
+
+        window.addEventListener('scroll', onScroll)
+
+        return () => window.removeEventListener('scroll', onScroll)
+    }, [])
+
+    const onUpdateCurrentLink = (value) => {
+        setCurrentLink(value);
     }
 
-        return (
-            <header>
-                <nav className="mr-auto" ref={navRef}>
-                    <a href='/home'>Home</a>
-                    <a href='/about'>About</a>
-                    <a href='/education'>Education</a>
-                    <a href='/experience'>Experience</a>
-                    <a href='/projects'>Projects</a>
-                    <button
-                        className="nav-btn nav-close-btn"
-                        onClick={showNavbar}>
-                        <FaTimes />
-                    </button>
-                </nav>
-                <button className="nav-btn" onClick={showNavbar}>
-                    <FaBars />
-                </button>
-            </header>
+    return (
+        <Navbar expand='lg' className={scroll ? 'scrolled': ''}>
+            <Container>
+                <Navbar.Toggle aria-controls='basic-navbar-nav' > 
+                    <span className='navbar-toggle-icon'></span>
+                </Navbar.Toggle>
 
-        );
+                <Navbar.Collapse id='basic-navbar-nav'>
+                <Nav className='me-auto'>
+                    <Nav.Link href='#home' className={currentLink === 'home' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateCurrentLink('home')}>Home</Nav.Link>
+                    <Nav.Link href='#about' className={currentLink === 'about' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateCurrentLink('about')}>About</Nav.Link>
+                    <Nav.Link href='#eductaion' className={currentLink === 'eduction' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateCurrentLink('education')}>Education</Nav.Link>
+                    <Nav.Link href='#experience' className={currentLink === 'experience' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateCurrentLink('experience')}>Experience</Nav.Link>
+                    <Nav.Link href='#projects' className={currentLink === 'projects' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateCurrentLink('projects')}>Projects</Nav.Link>
+                </Nav>
+                </Navbar.Collapse>
+            </Container>
+            </Navbar>
+    );
 }
- 
+
 export default NavBar;
