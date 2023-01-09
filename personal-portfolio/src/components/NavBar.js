@@ -13,7 +13,7 @@ function NavBar() {
 
         return (
             <header>
-                <nav ref={navRef}>
+                <nav className="mr-auto" ref={navRef}>
                     <a href='/home'>Home</a>
                     <a href='/about'>About</a>
                     <a href='/education'>Education</a>

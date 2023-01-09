@@ -8,13 +8,14 @@
     font-family: 'Outfit', sans-serif;
 }
 
-:root{
+ :root{
     --mainColor: #04423F;
     --mainColorLight: #66BEBA;
     --secondaryColor: #D4CDFF;
     --textColor: #FFFFFF;
 }
 
+/*
 header {
     display: flex;
     align-items: center;
@@ -24,6 +25,7 @@ header {
     background-color: var(--mainColor);
     color: var(--textColor)
 }
+
 
 nav a {
     margin: 0 1rem;
@@ -37,6 +39,7 @@ nav a:hover {
 
 header .nav-btn {
     padding: 5px;
+    float: right;
     cursor: pointer;
     background: transparent;
     border: none;
@@ -88,4 +91,4 @@ nav {
 	nav a {
 		font-size: 1.5rem;
 	}
-}
+} */
